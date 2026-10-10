@@ -24,6 +24,9 @@ struct HomeView: View {
             }
             .listStyle(.plain)
         }
+        .task {
+            await viewModel.loadProducts()
+        }
     }
 }
 

@@ -19,7 +19,7 @@ struct ProductDetailView: View {
                             .font(.largeTitle)
                             .bold()
                         
-                        Text(product.description)
+                   
                     }
                     .frame(width: geometry.size.width / 2)
                     
@@ -60,8 +60,7 @@ struct ProductDetailView: View {
             name: "Nike Air Motion",
             price: 122.64,
             brand: "Nike",
-            image: "https://i.imgur.com/E8ZBAnC.png",
-            description: "Modelo deportivo con tecnología Air para máxima amortiguación."
+            image: "https://i.imgur.com/E8ZBAnC.png"
         )
     )
 }

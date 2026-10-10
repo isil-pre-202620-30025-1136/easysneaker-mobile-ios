@@ -11,5 +11,4 @@ struct Product: Identifiable {
     let price: Double
     let brand: String
     let image: String
-    let description: String
 }
