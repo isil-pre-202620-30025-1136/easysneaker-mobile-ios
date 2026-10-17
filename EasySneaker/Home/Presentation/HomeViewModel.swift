@@ -16,7 +16,7 @@ class HomeViewModel: ObservableObject {
     func loadProducts() async {
         
         do {
-            let products = try await repository.getProducts()
+            products = try await repository.getProducts()
         } catch {
             
         }
