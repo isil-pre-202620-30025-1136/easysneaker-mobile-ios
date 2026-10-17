@@ -15,7 +15,8 @@ enum AppRoute: Hashable {
 struct ContentView: View {
     
     @State private var path = NavigationPath()
-    
+    @StateObject var viewModel = HomeViewModel()
+
     var body: some View {
         NavigationStack(path: $path) {
             OnBoardingView {
@@ -35,6 +36,7 @@ struct ContentView: View {
                 }
             }
         }
+        .environmentObject(viewModel)
     }
 }
 

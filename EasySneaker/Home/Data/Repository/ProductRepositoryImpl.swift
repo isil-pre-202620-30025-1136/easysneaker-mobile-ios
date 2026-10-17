@@ -14,16 +14,6 @@ class ProductRepositoryImpl: ProductRepository {
     
     func getProducts() async throws -> [Product] {
         let dtos = try await api.getProducts()
-        
-        return dtos.map { dto in
-            Product(id: dto.id,
-                    name: dto.name,
-                    price: dto.price,
-                    brand: dto.brand,
-                    image: dto.image)
-        }
-        
+        return dtos.map { $0.toDomain() }
     }
-    
-    
 }

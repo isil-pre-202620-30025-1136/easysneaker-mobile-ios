@@ -19,7 +19,7 @@ struct MainView: View {
             }
             
             Tab("Wishlist", systemImage: "heart") {
-                Text("Wishlist")
+                FavoritesView()
             }
             
             Tab("Profile", systemImage: "person") {
@@ -35,4 +35,5 @@ struct MainView: View {
 
 #Preview {
     MainView()
+        .environmentObject(HomeViewModel())
 }

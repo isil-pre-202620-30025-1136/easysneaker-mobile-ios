@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     
-    @StateObject var viewModel = HomeViewModel()
+    @EnvironmentObject private var viewModel: HomeViewModel
     
     var body: some View {
         ScrollView {
@@ -18,7 +18,11 @@ struct HomeView: View {
                 GridItem(.flexible())
             ]) {
                 ForEach(viewModel.products) { product in
-                    ProductCard(product: product)
+                    ProductCard(
+                        product: product,
+                        isFavorite: viewModel.isFavorite(id: product.id)) {
+                            viewModel.toggleFavorite(id: product.id)
+                        }
                 }
                 .listRowSeparator(.hidden)
             }
@@ -33,4 +37,5 @@ struct HomeView: View {
 
 #Preview {
     HomeView()
+        .environmentObject(HomeViewModel())
 }
