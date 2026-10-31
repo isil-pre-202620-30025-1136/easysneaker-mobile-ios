@@ -13,18 +13,25 @@ class HomeViewModel: ObservableObject {
     @Published private(set) var favoriteIds: Set<Int> = []
     
     let repository: ProductRepository = ProductRepositoryImpl.shared
+    let favoriteRepository: FavoriteRepository = FavoriteRepositoryImpl.shared
     
     var favoriteProducts: [Product] {
         products.filter { product in
-            favoriteIds.contains(product.id)
+            isFavorite(id: product.id)
         }
     }
     
     func toggleFavorite(id: Int) {
-        if favoriteIds.contains(id) {
-            favoriteIds.remove(id)
+        if isFavorite(id: id) {
+           try? favoriteRepository.removeFavorite(id: id)
         } else {
-            favoriteIds.insert(id)
+           try? favoriteRepository.addFavorite(id: id)
+        }
+        
+        do {
+            favoriteIds = try favoriteRepository.getFavorites()
+        } catch {
+            
         }
     }
     
@@ -39,6 +46,7 @@ class HomeViewModel: ObservableObject {
         
         do {
             products = try await repository.getProducts()
+            favoriteIds = try favoriteRepository.getFavorites()
         } catch {
             
         }
