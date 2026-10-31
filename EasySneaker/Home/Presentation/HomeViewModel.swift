@@ -12,6 +12,8 @@ class HomeViewModel: ObservableObject {
     @Published private(set) var products:[Product] = []
     @Published private(set) var favoriteIds: Set<Int> = []
     
+    let repository: ProductRepository = ProductRepositoryImpl.shared
+    
     var favoriteProducts: [Product] {
         products.filter { product in
             favoriteIds.contains(product.id)
@@ -31,7 +33,6 @@ class HomeViewModel: ObservableObject {
     }
     
     
-    let repository = ProductRepositoryImpl.shared
     
     
     func loadProducts() async {
